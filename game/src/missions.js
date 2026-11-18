@@ -5,6 +5,9 @@
 import { CITY } from './config.js';
 import { addMoney, createCar, laneCoord, roadCenter, toast } from './world.js';
 
+/** How close the player must get to a waypoint for it to count as reached. */
+const ARRIVE_RADIUS = 62;
+
 /** Snap a point to the nearest traffic lane, so markers are reachable by car. */
 function snapToRoad(city, x, y) {
   const c0 = city.road / 2;
@@ -163,7 +166,7 @@ function stepDone(game, step) {
     case 'goto':
     case 'collect': {
       const d = Math.hypot(p.x - step.x, p.y - step.y);
-      return d < 62;
+      return d < ARRIVE_RADIUS;
     }
     case 'kill':
       return step.target && !step.target.alive;

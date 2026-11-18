@@ -1,10 +1,8 @@
 // The wanted system and the police. Crime raises stars (addWanted lives in world.js); this file
 // fades them once the player hides, and keeps a fleet of police interceptors chasing the player,
 // ramming and shooting. At higher stars it throws a roadblock ahead of the player.
-import { PALETTE, VEHICLES, WANTED } from './config.js';
+import { PALETTE, POLICE_TYPE, VEHICLES, WANTED } from './config.js';
 import { addEffect, angleDelta, clamp, collideCircle, laneCoord, roadCenter, toast } from './world.js';
-
-const POLICE_TYPE = 7; // Interceptor
 
 /** How many police cars chase at each wanted level. */
 function policeTarget(wanted) {
@@ -22,7 +20,6 @@ function nearestLane(city, x, y) {
     const yc = clamp(y, c0, max);
     for (const side of [-1, 1]) {
       const lc = laneCoord(k, side);
-      const dh = Math.abs(y - lc);
       const dh2 = (xc - x) * (xc - x) + (lc - y) * (lc - y);
       if (dh2 < best.d) {
         best.d = dh2;
@@ -33,7 +30,6 @@ function nearestLane(city, x, y) {
         best.d = dv2;
         best = { x: lc, y: yc, angle: y >= yc ? Math.PI / 2 : -Math.PI / 2, axis: 'v' };
       }
-      void dh;
     }
   }
   return best;
@@ -200,8 +196,6 @@ function policeShoot(game, dt) {
 
 function spawnRoadblock(game) {
   const p = game.player;
-  const car = p.car;
-  const lane = nearestLane(game.city, p.x, p.y);
   // Put the block ahead of the player's heading, on the lane they occupy.
   const ahead = 420;
   const ax = p.x + Math.cos(p.angle) * ahead;
@@ -214,7 +208,6 @@ function spawnRoadblock(game) {
   };
   game.cars.push(blocker);
   game.roadblocks.push({ x: bl.x, y: bl.y, angle: bl.angle, t: 0, blocker });
-  void lane; void car;
 }
 
 function stepRoadblocks(game, dt) {

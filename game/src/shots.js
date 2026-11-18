@@ -2,7 +2,7 @@
 // and returns the controls an autopilot should hold plus how long to simulate, so the frame the
 // screenshot captures is what a real game looks like (traffic flowing, a mission on the HUD, police
 // in pursuit) and the same seed always gives the same frame. No drawing happens here.
-import { CITY } from './config.js';
+import { CITY, POLICE_TYPE } from './config.js';
 import { createCar, enterCar, laneCoord, roadCenter } from './world.js';
 import { startMission } from './missions.js';
 import { spawnPoliceAt } from './police.js';
@@ -52,7 +52,7 @@ function parkH(game, type, roadK, side, x) {
 
 /** Stage a roadblock (barricade + a parked interceptor) at an exact spot. */
 function addRoadblock(game, x, y, blockerAngle) {
-  const blocker = createCar(game, 7, x, y, blockerAngle, 'parked');
+  const blocker = createCar(game, POLICE_TYPE, x, y, blockerAngle, 'parked');
   blocker.color = '#20283a';
   game.cars.push(blocker);
   game.roadblocks.push({ x, y, angle: 0, t: 0, blocker });

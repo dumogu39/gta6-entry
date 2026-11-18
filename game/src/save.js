@@ -3,6 +3,9 @@
 // load. Everything is guarded, so a blocked store degrades to a session-only game.
 import { SAVE_KEY } from './config.js';
 
+/** Bump this when the save shape changes; old saves are simply ignored. */
+const SAVE_VERSION = 1;
+
 export function saveGame(game) {
   try {
     const p = game.player;
@@ -16,7 +19,7 @@ export function saveGame(game) {
       missionActive = true;
     }
     const data = {
-      v: 1,
+      v: SAVE_VERSION,
       money: p.money,
       health: p.health,
       wanted: p.wanted,
@@ -44,7 +47,7 @@ export function loadGame(game) {
     const raw = window.localStorage.getItem(SAVE_KEY);
     if (!raw) return null;
     const data = JSON.parse(raw);
-    if (!data || data.v !== 1) return null;
+    if (!data || data.v !== SAVE_VERSION) return null;
     return data;
   } catch {
     return null;

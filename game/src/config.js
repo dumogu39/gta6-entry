@@ -17,6 +17,9 @@ export const DENSITY = { traffic: 3, parked: 3, peds: 3 };
 /** The logical viewport the game is laid out for (the renderer fits it to the window). */
 export const VIEW = { width: 1280, height: 720 };
 
+/** The HUD minimap: its on-screen size and the distance from the screen's corner. */
+export const MINIMAP = { size: 200, margin: 18 };
+
 /**
  * The city's road grid. Roads run on a square lattice; `grid` blocks sit between `grid + 1` roads
  * in each direction. A road centreline k (0..grid) lies at road/2 + k*cell, so every lane stays on
@@ -50,6 +53,9 @@ export const VEHICLES = [
   { name: 'Cab', kind: 'taxi', max: 272, accel: 290, brake: 520, turn: 3.1, length: 38, width: 17, hp: 60, colors: ['#f2c14e', '#e0a830'] },
   { name: 'Interceptor', kind: 'police', max: 352, accel: 390, brake: 660, turn: 3.3, length: 40, width: 17, hp: 95, colors: ['#20283a'] },
 ];
+
+/** The index into VEHICLES of the police interceptor, used wherever a police car is spawned. */
+export const POLICE_TYPE = 7;
 
 /** The player's weapons. Melee weapons are free of ammo; guns spend it and are bought at the armory. */
 export const WEAPONS = {

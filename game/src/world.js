@@ -8,6 +8,9 @@ import { chance, int, pick, range } from './random.js';
 
 const TAU = Math.PI * 2;
 
+/** How many particles a destroyed car throws out. */
+const EXPLOSION_PARTICLES = 26;
+
 export function clamp(value, min, max) {
   return value < min ? min : value > max ? max : value;
 }
@@ -196,6 +199,7 @@ export function driveCar(car, dt, throttle, steer, handbrake) {
     car.speed -= Math.sign(car.speed) * v.accel * 0.45 * dt;
     if (Math.abs(car.speed) < 3) car.speed = 0;
   }
+  // Reverse tops out at 40% of top speed, so a car can always back out of a jam but never outruns forwards.
   car.speed = clamp(car.speed, -v.max * 0.4, v.max);
   const grip = handbrake ? 1.7 : 1;
   const speedFactor = Math.min(1, Math.abs(car.speed) / 46);
@@ -384,7 +388,7 @@ export function stepPlayer(game, dt, input) {
 }
 
 function explosion(game, x, y) {
-  for (let i = 0; i < 26; i += 1) {
+  for (let i = 0; i < EXPLOSION_PARTICLES; i += 1) {
     const a = game.random() * Math.PI * 2;
     const s = 60 + game.random() * 220;
     game.particles.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 0.5 + game.random() * 0.5, color: i % 3 === 0 ? '#ffd166' : '#ff6b3d', size: 2 + game.random() * 4 });

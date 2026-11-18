@@ -18,6 +18,9 @@ import { createRenderer, SCREEN_PAUSED, SCREEN_PLAY, SCREEN_TITLE } from './rend
 import { stageShot } from './shots.js';
 
 const MAX_FRAME = 0.25;
+const AUTOSAVE_INTERVAL = 2.5;
+const RESPAWN_DELAY = 2.4;
+const RESPAWN_COST = 100;
 
 const params = new URLSearchParams(window.location.search);
 const shot = params.get('shot');
@@ -177,11 +180,11 @@ function runGame() {
     const p = game.player;
     if (p.alive) return;
     game.deadTimer = (game.deadTimer || 0) + dt;
-    if (game.deadTimer >= 2.4) {
+    if (game.deadTimer >= RESPAWN_DELAY) {
       p.alive = true;
       p.health = PLAYER.maxHealth;
       p.wanted = 0;
-      p.money = Math.max(0, p.money - 100);
+      p.money = Math.max(0, p.money - RESPAWN_COST);
       p.mode = 'walk';
       p.car = null;
       p.x = game.city.world / 2;
@@ -216,7 +219,7 @@ function runGame() {
       }
       respawnIfDead(1 / 60);
       saveTimer += 1 / 60;
-      if (saveTimer >= 2.5) {
+      if (saveTimer >= AUTOSAVE_INTERVAL) {
         saveTimer = 0;
         saveGame(game);
       }

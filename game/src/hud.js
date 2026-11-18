@@ -1,7 +1,7 @@
 // The HUD: health, money, wanted stars, the minimap (with entity dots), the mission objective and a
 // distance readout, the weapon and ammo, dialogue and toasts, and shop prompts. It is drawn in the
 // 1280x720 logical screen space after the world, so it stays fixed while the camera moves.
-import { PALETTE, PLAYER, VIEW, WEAPONS, WANTED } from './config.js';
+import { MINIMAP, PALETTE, PLAYER, VIEW, WEAPONS, WANTED } from './config.js';
 import { nearShop } from './shops.js';
 
 function panel(ctx, x, y, w, h, r, fill) {
@@ -56,9 +56,9 @@ export function drawHud(ctx, game, cam, minimap, text) {
   text('⭐ WANTED', VIEW.width - 24, 48, 13, p.wanted > 0 ? PALETTE.wanted : PALETTE.muted, 'right', 'bold');
 
   // Minimap with border and view frustum.
-  const mm = 200;
-  const mx = 18;
-  const my = VIEW.height - mm - 18;
+  const mm = MINIMAP.size;
+  const mx = MINIMAP.margin;
+  const my = VIEW.height - mm - MINIMAP.margin;
   ctx.drawImage(minimap, mx, my, mm, mm);
   const ms = mm / game.city.world;
 

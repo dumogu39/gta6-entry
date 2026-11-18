@@ -10,6 +10,11 @@ import { chance, int, pick, range } from './random.js';
 const LANE_OFFSET = CITY.road / 4;
 const SIDEWALK_OFFSET = CITY.road / 2 + 11;
 
+// Base entity counts at DENSITY 1; the real counts scale with the DENSITY knobs in config.js.
+const TRAFFIC_BASE = 26;
+const PARKED_BASE = 24;
+const PED_BASE = 48;
+
 /** The right-hand lane side for a direction of travel. */
 function rightLaneSide(axis, dir) {
   return axis === 'h' ? dir : -dir;
@@ -167,9 +172,9 @@ function stepRouteFollower(city, e, dt, speed, turnRate, offset, turnProb, rando
 /** Spawn traffic cars, parked cars and pedestrians into the fresh game. */
 export function spawnTraffic(game) {
   const { city, random } = game;
-  const trafficCount = Math.round(26 * DENSITY.traffic);
-  const parkedCount = Math.round(24 * DENSITY.parked);
-  const pedCount = Math.round(48 * DENSITY.peds);
+  const trafficCount = Math.round(TRAFFIC_BASE * DENSITY.traffic);
+  const parkedCount = Math.round(PARKED_BASE * DENSITY.parked);
+  const pedCount = Math.round(PED_BASE * DENSITY.peds);
 
   for (let i = 0; i < trafficCount; i += 1) {
     const type = int(random, 0, 6); // civilian vehicles only (0..6)
