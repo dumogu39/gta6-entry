@@ -101,7 +101,7 @@ function summarize(dir: string, dossierPath: string): void {
   console.log(`verified: ${SCREENSHOT_COUNT} screenshots, required fields present, all sizes under caps.`);
 }
 
-/** Count every file and byte under `dir`, directories included in the walk. */
+/** Count every file and byte under `dir`, recursing through its subdirectories. */
 function walkCount(dir: string): { files: number; bytes: number } {
   let files = 0;
   let bytes = 0;

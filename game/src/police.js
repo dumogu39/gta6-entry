@@ -4,7 +4,7 @@
 import { PALETTE, POLICE_TYPE, VEHICLES, WANTED } from './config.js';
 import { addEffect, angleDelta, clamp, collideCircle, laneCoord, roadCenter, toast } from './world.js';
 
-/** How many police cars chase at each wanted level. */
+/** How many police cars chase at each wanted level (one star already brings a pair). */
 function policeTarget(wanted) {
   return wanted <= 0 ? 0 : wanted + 1;
 }

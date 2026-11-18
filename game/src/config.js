@@ -30,6 +30,7 @@ export const CITY = {
   cell: 320,
   road: 72,
 };
+// The logical side length of the square city: grid cells plus the outer half-road margin on each side.
 CITY.world = CITY.grid * CITY.cell + CITY.road;
 
 /** The player on foot: speed, size and the range at which a car can be entered. */

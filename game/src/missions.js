@@ -36,7 +36,6 @@ function blockCenter(city, col, row) {
 /** Build the mission chain with concrete waypoints from this city. */
 export function createMissions(game) {
   const { city } = game;
-  const g = CITY.grid - 1;
   const c = (col, row) => snapToRoad(city, blockCenter(city, col, row).x, blockCenter(city, col, row).y);
 
   const chopShop = c(2, 5);

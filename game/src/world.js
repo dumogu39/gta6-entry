@@ -389,7 +389,7 @@ export function stepPlayer(game, dt, input) {
 
 function explosion(game, x, y) {
   for (let i = 0; i < EXPLOSION_PARTICLES; i += 1) {
-    const a = game.random() * Math.PI * 2;
+    const a = game.random() * TAU;
     const s = 60 + game.random() * 220;
     game.particles.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 0.5 + game.random() * 0.5, color: i % 3 === 0 ? '#ffd166' : '#ff6b3d', size: 2 + game.random() * 4 });
   }

@@ -9,9 +9,9 @@ const SAVE_VERSION = 1;
 export function saveGame(game) {
   try {
     const p = game.player;
-    let missionIndex = game.mission ? game.mission.index : -1;
-    let missionStep = game.mission ? game.mission.step : 0;
-    let missionActive = game.mission ? game.mission.active : false;
+    let missionIndex = game.mission?.index ?? -1;
+    let missionStep = game.mission?.step ?? 0;
+    let missionActive = game.mission?.active ?? false;
     // A save taken between missions keeps the next job as the one to resume.
     if (!missionActive && game.mission && game.mission.pendingNext !== undefined) {
       missionIndex = game.mission.pendingNext;

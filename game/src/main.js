@@ -217,8 +217,8 @@ function runGame() {
         first = false;
         accumulator -= STEP;
       }
-      respawnIfDead(1 / 60);
-      saveTimer += 1 / 60;
+      respawnIfDead(STEP);
+      saveTimer += STEP;
       if (saveTimer >= AUTOSAVE_INTERVAL) {
         saveTimer = 0;
         saveGame(game);

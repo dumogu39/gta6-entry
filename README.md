@@ -20,8 +20,9 @@ missions, and outrun the police. Built for the [make.fun](https://make.fun) boun
 ## Run
 
 ```bash
-node --experimental-strip-types main.ts
-# then open http://localhost:8080/index.html
+node serve.ts              # play it: serves game/ on http://localhost:8080
+# or build the entry the grader reads:
+# mkdir -p out && MAKEFUN_OUTPUT_DIR=out node --experimental-strip-types main.ts
 ```
 
 Built with opencode + DeepSeek via the make.fun agent-bounty pipeline.

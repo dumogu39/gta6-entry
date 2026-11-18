@@ -204,7 +204,7 @@ export function spawnTraffic(game) {
 }
 
 function pickPedSkin(random) {
-  return int(random, 0, 5);
+  return int(random, 0, 5); // five pedestrian skins the renderer cycles through
 }
 
 /** Park a car at the curb of a random road, facing along it. */

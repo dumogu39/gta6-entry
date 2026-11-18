@@ -4,8 +4,7 @@
 import { MINIMAP, PALETTE, PLAYER, VIEW, WEAPONS, WANTED } from './config.js';
 import { nearShop } from './shops.js';
 
-function panel(ctx, x, y, w, h, r, fill) {
-  ctx.fillStyle = fill;
+function roundedRectPath(ctx, x, y, w, h, r) {
   ctx.beginPath();
   ctx.moveTo(x + r, y);
   ctx.arcTo(x + w, y, x + w, y + h, r);
@@ -13,17 +12,16 @@ function panel(ctx, x, y, w, h, r, fill) {
   ctx.arcTo(x, y + h, x, y, r);
   ctx.arcTo(x, y, x + w, y, r);
   ctx.closePath();
+}
+
+function panel(ctx, x, y, w, h, r, fill) {
+  ctx.fillStyle = fill;
+  roundedRectPath(ctx, x, y, w, h, r);
   ctx.fill();
 }
 
 function strokePanel(ctx, x, y, w, h, r) {
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + w, y, x + w, y + h, r);
-  ctx.arcTo(x + w, y + h, x, y + h, r);
-  ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y, x + w, y, r);
-  ctx.closePath();
+  roundedRectPath(ctx, x, y, w, h, r);
   ctx.stroke();
 }
 

@@ -10,6 +10,7 @@ import { SCREEN_PLAY, SCREEN_TITLE } from './render.js';
 
 /** A plain controls object with nothing held but forward throttle. */
 function driveForward(throttle = -1) {
+  // move.y of -1 is forward (W/up), so the autopilot drives straight ahead.
   return { move: { x: 0, y: throttle }, fire: false, firePressed: false, enter: false, use: false, handbrake: false, aim: { x: 0, y: 0 } };
 }
 
